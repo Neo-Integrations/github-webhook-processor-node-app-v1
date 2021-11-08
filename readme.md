@@ -9,11 +9,11 @@ This is a Node JS implementation of [github-webhook-processor-api-v1](https://gi
 
  - Create `.env` file at the root of the project. This file will have all the secrets, so keep it safe. Please note, since the secrets will be in plain text, the better approach will be to pass them as environment variable but for simplicity, I am using `dotenv` util.
   ```
-    secret.token={}
-    personal.token={}
-    key.passphrase={}
-    port=443
-    branch.to.protect=main
+  WEBHOOK_TOKEN=
+  GITHUB_PERSONAL_TOKEN=
+  KEY_PASS=
+  PORT=443
+  BRANCH_TO_PROTECT=main
   ```
 
  - Finally, run `nohup node app.js &` to start the node js application in demon mode
