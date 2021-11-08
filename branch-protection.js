@@ -30,7 +30,7 @@ module.exports = {
 function enableBranchprotection(jsonObj, req, res) {
     if(req.header('x-github-event') == 'create' &&
             jsonObj.ref_type == 'branch' &&
-            jsonObj.ref == process.env['branch.to.protect']){
+            jsonObj.ref == process.env['BRANCH_TO_PROTECT']){
 
         const subject = jsonObj.sender.login;
         const ownerRepo = jsonObj.repository.full_name;
@@ -66,7 +66,7 @@ function barnchProtectionHttpRequest(ownerRepo, branchName) {
     headers: {
       'Content-Type': 'application/json',
       'User-Agent': 'PostmanRuntime/7.28.4',
-      'Authorization': 'token ' + process.env['personal.token']
+      'Authorization': 'token ' + process.env['GITHUB_PERSONAL_TOKEN']
     }
   };
 
@@ -98,7 +98,7 @@ function issueCreationHttpRequest(subject, ownerRepo) {
     headers: {
       'Content-Type': 'application/json',
       'User-Agent': 'PostmanRuntime/7.28.4',
-      'Authorization': 'token ' + process.env['personal.token']
+      'Authorization': 'token ' + process.env['GITHUB_PERSONAL_TOKEN']
     }
   };
 

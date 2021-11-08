@@ -4,22 +4,24 @@ const util = require('util');
 const express = require('express');
 const crypto = require('crypto');
 
-const interfaces = require('./interfaces');
+const interfaces = require('./branch-protection');
 
 require('dotenv').config();
 
-const log = fs.createWriteStream(__dirname + '/logs/app.log', {flags : 'a'});
-var stdout = process.stdout;
+if(process.env['log.file.enable'] == 'yes') {
+  const log = fs.createWriteStream(__dirname + '/logs/app.log', {flags : 'a'});
+  var stdout = process.stdout;
 
-console.log = function(d) { //
-  log.write(util.format(d) + '\n');
-  stdout.write(util.format(d) + '\n');
-};
+  console.log = function(d) { //
+    log.write(util.format(d) + '\n');
+    stdout.write(util.format(d) + '\n');
+  };
+}
 
 
 const app = express();
-const port = process.env['port'];
-const privateKeyPassphrase = process.env['key.passphrase'];
+const port = process.env['PORT'];
+const privateKeyPassphrase = process.env['KEY_PASS'];
 
 // This line is from the Node.js HTTPS documentation.
 const options = {
